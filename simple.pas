@@ -22,7 +22,7 @@ var
   i: integer;
 begin
   ohmd_device_geti(Hmd, Val, @iv[0]);
-	Write('  ', Name, ': ');
+  Write('  ', Name, ': ');
   for i := 0 to Len-1 do
     Write(iv[i]);
   Writeln;
@@ -33,8 +33,8 @@ var
   iv: array[0..15] of single;
   i: integer;
 begin
-	ohmd_device_getf(Hmd, Val, @iv[0]);
-	Write('  ', Name, ': ');
+  ohmd_device_getf(Hmd, Val, @iv[0]);
+  Write('  ', Name, ': ');
   for i := 0 to Len-1 do
     Write(iv[i]:0:6, '  ');
   Writeln;
@@ -62,13 +62,13 @@ begin
   if NumDevices < 0 then
   begin
     Writeln('Failed to probe devices:', ohmd_ctx_get_error(Ctx));
-	  exit;
-	end;
+    exit;
+  end;
   Writeln('Number of devices: ', NumDevices);
   for i := 0 to NumDevices-1 do
   begin
     ohmd_list_geti(Ctx, i, OHMD_DEVICE_CLASS, @DeviceClass);
-		ohmd_list_geti(Ctx, i, OHMD_DEVICE_FLAGS, @DeviceFlags);
+    ohmd_list_geti(Ctx, i, OHMD_DEVICE_FLAGS, @DeviceFlags);
     Writeln('Device #', i);
     Writeln('  Vendor: ', ohmd_list_gets(Ctx, i, OHMD_VENDOR));
     Writeln('  Product: ', ohmd_list_gets(Ctx, i, OHMD_PRODUCT));
@@ -83,16 +83,16 @@ begin
     Writeln('    Left controller: ', YesNo(DeviceFlags and integer(OHMD_DEVICE_FLAGS_LEFT_CONTROLLER)));
     Writeln('    Right controller: ', YesNo(DeviceFlags and integer(OHMD_DEVICE_FLAGS_RIGHT_CONTROLLER)));
   end;
-	Writeln('Opening device #0');
-	Hmd := ohmd_list_open_device(Ctx, 0);
+  Writeln('Opening device #0');
+  Hmd := ohmd_list_open_device(Ctx, 0);
   if Hmd = nil then
   begin
-		Writeln('Failed to open device: ', ohmd_ctx_get_error(Ctx));
-		exit;
-	end;
-	ohmd_device_geti(Hmd, OHMD_SCREEN_HORIZONTAL_RESOLUTION, @Ivals[0]);
-	ohmd_device_geti(Hmd, OHMD_SCREEN_VERTICAL_RESOLUTION, @Ivals[1]);
-	Writeln('  Resolution: ', Ivals[0], ' x ', Ivals[1]);
+    Writeln('Failed to open device: ', ohmd_ctx_get_error(Ctx));
+    exit;
+  end;
+  ohmd_device_geti(Hmd, OHMD_SCREEN_HORIZONTAL_RESOLUTION, @Ivals[0]);
+  ohmd_device_geti(Hmd, OHMD_SCREEN_VERTICAL_RESOLUTION, @Ivals[1]);
+  Writeln('  Resolution: ', Ivals[0], ' x ', Ivals[1]);
   InfoF(Hmd, 'H size', 1, OHMD_SCREEN_HORIZONTAL_SIZE);
   InfoF(Hmd, 'V size', 1, OHMD_SCREEN_VERTICAL_SIZE);
   InfoF(Hmd, 'Lens separation', 1, OHMD_LENS_HORIZONTAL_SEPARATION);
@@ -105,7 +105,7 @@ begin
   InfoI(Hmd, 'Control count', 1, OHMD_CONTROL_COUNT);
   for i := 0 to 9999 do
   begin
-		ohmd_ctx_update(ctx);
+    ohmd_ctx_update(ctx);
     InfoF(Hmd, 'Rotation quat: ', 4, OHMD_ROTATION_QUAT);
     InfoF(Hmd, 'Position vec : ', 3, OHMD_POSITION_VECTOR);
     Writeln;
