@@ -243,8 +243,8 @@ begin
   {$ENDIF}
   if Lib = dynlibs.NilHandle then
   begin
-    exit;
     Result := false;
+    exit;
   end;
   ohmd_ctx_create := GetProcedureAddress(Lib, 'ohmd_ctx_create');
   ohmd_ctx_destroy := GetProcedureAddress(Lib, 'ohmd_ctx_destroy');
